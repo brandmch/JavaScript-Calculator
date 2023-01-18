@@ -24,9 +24,23 @@
   border-radius: 10px;
 }
 
+.all-clear {
+  grid-column: 1 / span 2;
+}
+
+.zero {
+  grid-column: 1 / span 2;
+}
+
+.equals {
+  grid-column: 4 / span 1;
+  grid-row: 5 / span 2;
+}
+
 .box {
   border: 1px solid black;
   margin: 0.25vh;
+  display: flex;
 }
 
 .r1 {
