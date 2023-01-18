@@ -1,9 +1,10 @@
 import "./App.css";
 import { useState } from "react";
+import { Parser } from "expr-eval";
 
 function App() {
-  const [subTotal, setSubTotal] = useState(0);
   const [total, setTotal] = useState(0);
+  const [subTotal, setSubTotal] = useState(0);
 
   const buttons = [
     ["all-clear r2 box", "AC"],
@@ -26,10 +27,19 @@ function App() {
   ];
 
   function buttonPress(key) {
-    if (total === 0) {
-      setTotal(key);
+    if (subTotal === 0) {
+      setSubTotal(key);
     } else {
       switch (key) {
+        case "AC":
+          setTotal(0);
+          setSubTotal(0);
+          break;
+        case ".":
+          if (!/[^0-9]/.test(subTotal)) {
+            setSubTotal(`${subTotal}.`);
+          }
+          break;
         case "1":
         case "2":
         case "3":
@@ -40,20 +50,24 @@ function App() {
         case "8":
         case "9":
         case "0":
-          setTotal(`${total}${key}`);
-          break;
-        case ".":
-          if (!/[^0-9]/.test(total)) {
-            setTotal(`${total}.`);
-          }
+          setSubTotal(`${subTotal}${key}`);
           break;
         case "+":
         case "-":
         case "*":
         case "/":
+          if (total == 0) {
+            setTotal(`${subTotal}${key}`);
+          } else {
+            setTotal(`${total}${subTotal}${key}`);
+          }
+          setSubTotal(0);
+          break;
         case "=":
-        case "AC":
+          let parser = new Parser();
+          setSubTotal(parser.parse(`${total}${subTotal}`).evaluate());
           setTotal(0);
+          break;
       }
     }
   }
@@ -63,8 +77,8 @@ function App() {
       <div className="calculator-container">
         <div className="screen r1">
           <div>
-            <p style={{ fontSize: "large" }}>{subTotal}</p>
-            <p className="total">{total}</p>
+            <p style={{ fontSize: "large" }}>{total}</p>
+            <p className="total">{subTotal}</p>
           </div>
         </div>
         {buttons.map((curr) => (
