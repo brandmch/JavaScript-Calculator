@@ -70,9 +70,9 @@ function App() {
           let parser = new Parser();
           let newTotal = parser.parse(`${total}${subTotal}`).evaluate();
           if (newTotal.toString().split("").length > 14) {
-            newTotal = newTotal.toFixed(4);
+            newTotal = newTotal.toFixed(4) / 1;
             if (newTotal.toString().split("").length > 14) {
-              newTotal = parseInt(newTotal).toExponential(2);
+              newTotal = parseInt(newTotal).toExponential(2) / 1;
             }
           }
           tempSubTotal = newTotal;
