@@ -27,7 +27,7 @@
   font-size: xx-large;
   color: white;
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: flex-end;
   margin: 2px;
   overflow: hidden;

@@ -5,7 +5,7 @@ import { Parser } from "expr-eval";
 function App() {
   const [total, setTotal] = useState(0);
   const [subTotal, setSubTotal] = useState(0);
-  const [freshStart, setFreshStart] = useState(false);
+  console.log(total, subTotal);
 
   const buttons = [
     ["all-clear r2 box", "AC"],
@@ -28,18 +28,20 @@ function App() {
   ];
 
   function buttonPress(key) {
-    if (subTotal === 0 || freshStart) {
-      setSubTotal(key);
-      setFreshStart(false);
+    let tempTotal = total;
+    let tempSubTotal = subTotal === 0 ? "" : subTotal;
+
+    if (key === "AC") {
+      tempTotal = 0;
+      tempSubTotal = 0;
+    } else if (tempSubTotal === tempTotal) {
+      tempTotal = `${tempTotal}${key}`;
+      tempSubTotal = 0;
     } else {
       switch (key) {
-        case "AC":
-          setTotal(0);
-          setSubTotal(0);
-          break;
         case ".":
-          if (!/[^0-9]/.test(subTotal)) {
-            setSubTotal(`${subTotal}.`);
+          if (!/[^0-9]/.test(tempSubTotal)) {
+            tempSubTotal = `${tempSubTotal}.`;
           }
           break;
         case "1":
@@ -52,18 +54,18 @@ function App() {
         case "8":
         case "9":
         case "0":
-          setSubTotal(`${subTotal}${key}`);
+          tempSubTotal = `${tempSubTotal}${key}`;
           break;
         case "+":
         case "-":
         case "*":
         case "/":
-          if (total == 0) {
-            setTotal(`${subTotal}${key}`);
+          if (total === 0) {
+            tempTotal = `${subTotal}${key}`;
           } else {
-            setTotal(`${total}${subTotal}${key}`);
+            tempTotal = `${total}${subTotal}${key}`;
           }
-          setSubTotal(0);
+          tempSubTotal = 0;
           break;
         case "=":
           let parser = new Parser();
@@ -71,12 +73,15 @@ function App() {
           if (newTotal > 99999999999999) {
             newTotal = newTotal.toExponential(2);
           }
-          setSubTotal(newTotal);
-          setTotal(newTotal);
-          setFreshStart(true);
+          tempSubTotal = newTotal;
+          tempTotal = newTotal;
+          break;
+        default:
           break;
       }
     }
+    setTotal(tempTotal);
+    setSubTotal(tempSubTotal);
   }
 
   return (
