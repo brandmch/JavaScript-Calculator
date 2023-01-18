@@ -21,8 +21,8 @@ function App() {
     ["box r5", "1"],
     ["box r5", "2"],
     ["box r5", "3"],
-    ["equals box", "="],
-    ["zero r6 box", "0"],
+    ["equals box btm-right", "="],
+    ["zero r6 box btm-left", "0"],
     ["box r6", "."],
   ];
 
