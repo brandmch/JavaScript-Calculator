@@ -20,6 +20,8 @@ const buttons = [
   ["box r6", "."],
 ];
 
+// Checks if a number is longer than 14 digits before displaying it on the calculator
+// Returns edited Number
 const checkIfMoreThan14 = (num) => {
   let tempNum = num;
   if (tempNum.toString().split("").length > 14) {
@@ -31,6 +33,8 @@ const checkIfMoreThan14 = (num) => {
   return tempNum;
 };
 
+// Checks if pressed key is icluded on the calculator or not
+// Returns Boolean
 const isValidKey = (key) => {
   let isValid;
   switch (key) {
