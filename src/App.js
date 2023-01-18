@@ -5,6 +5,7 @@ import { Parser } from "expr-eval";
 function App() {
   const [total, setTotal] = useState(0);
   const [subTotal, setSubTotal] = useState(0);
+  const [freshStart, setFreshStart] = useState(false);
 
   const buttons = [
     ["all-clear r2 box", "AC"],
@@ -27,8 +28,9 @@ function App() {
   ];
 
   function buttonPress(key) {
-    if (subTotal === 0) {
+    if (subTotal === 0 || freshStart) {
       setSubTotal(key);
+      setFreshStart(false);
     } else {
       switch (key) {
         case "AC":
@@ -65,8 +67,13 @@ function App() {
           break;
         case "=":
           let parser = new Parser();
-          setSubTotal(parser.parse(`${total}${subTotal}`).evaluate());
-          setTotal(0);
+          let newTotal = parser.parse(`${total}${subTotal}`).evaluate();
+          if (newTotal > 99999999999999) {
+            newTotal = newTotal.toExponential(2);
+          }
+          setSubTotal(newTotal);
+          setTotal(newTotal);
+          setFreshStart(true);
           break;
       }
     }

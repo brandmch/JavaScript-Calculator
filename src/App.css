@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: "Kanit", sans-serif;
 }
 
 .calculator-container {
@@ -29,6 +30,7 @@
   justify-content: end;
   align-items: flex-end;
   margin: 2px;
+  overflow: hidden;
 }
 
 .screen > div {
@@ -68,7 +70,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0.5px 0.5px 0.5px 0.5px #7a7a7a;
+  box-shadow: 0.75px 0.75px 0.75px 0.75px #7a7a7a;
 }
 
 .box:hover {
