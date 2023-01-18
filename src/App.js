@@ -129,6 +129,12 @@ function App() {
           </div>
         ))}
       </div>
+      <footer>
+        <p>Brandon McHugh 2022</p>
+        <p>
+          <a href="https://github.com/brandmch/JavaScript-Calculator">GitHub</a>
+        </p>
+      </footer>
     </div>
   );
 }
