@@ -31,6 +31,7 @@
   align-items: flex-end;
   margin: 2px;
   overflow: hidden;
+  font-family: "Roboto Mono", monospace;
 }
 
 .screen > div {
